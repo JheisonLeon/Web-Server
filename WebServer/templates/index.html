@@ -1,12 +1,101 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio de Sesión</title>
+  <link rel="stylesheet" href="../../static/css/login.css" />
+  <!--  Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 </head>
+
 <body>
-    HOLA MUNDO
+  <main class="container-fluid">
+    <div class="row">
+      <div class="col-12" id="formulario">
+
+        <h3 class="">BIENVENIDO</h3>
+        <br>
+        <div class="row">
+          <div class="col-5 linea">&nbsp;</div>
+          <div class="col-2 leyenda"><span class=""><i id="user" class="fa fa-users"></i></span></div>
+          <div class="col-5 linea">&nbsp;</div>
+        </div>
+        <br>
+        <form   class="needs-validation" method="POST" novalidate>
+          {% csrf_token %}
+          <div class="mb-4">
+            <div class="mb-3 position-relative">
+              <label for="" class="form-label">Nombre de Usuario:</label>
+              
+              <input type="text" class="form-control" name="email" id="inputForm" aria-describedby="emailHelpId"
+                placeholder="Ingrese su Nombre de Usuario" required>
+              <!--<small id="emailHelpId" class="form-text text-muted">Help text</small>-->
+              <div class="invalid-tooltip">
+                Ingrese un username válido
+              </div>
+            </div>
+          </div>
+          <div class="mb-4 position-relative">
+            <label for="contraseña" class="form-label">Contraseña:</label>
+            <div class="input-group flex-nowrap" id="contra">
+              <input id="contraseña" type="password" class="form-control" name="password" placeholder="Ingrese su Contraseña" required>
+              <span class="input-group-text" id="ver_clave" onclick="verClave()"><i id="icono"
+                  class="fa fa-eye"></i></span>
+                  <div class="invalid-tooltip">
+                    Ingrese su contraseña
+                  </div>
+            </div>
+          </div>
+          <div class="boton">
+            <button type="submit" name="signin" class="btn btn-primary" id="Ingresar">Ingresar</button>
+          </div>
+          
+        </form>
+
+
+      </div>
+     
+    </div>
+
+  </main>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %}
+      {% for m in messages %}
+        <script>
+          Swal.fire('{{m}}', '', 'error');
+        </script>
+      {% endfor %}
+    {% endif %}
+
 </body>
+<script>
+  let con = true
+  function verClave() {
+    let ver = document.getElementById("ver_clave");
+    let clave = document.getElementById("contraseña")
+    let icono = document.getElementById("icono")
+    if (con == true) {
+      clave.type = "text"
+      icono.classList.add("fa-eye-slash")
+      con = false
+    } else {
+      clave.type = "password"
+      icono.classList.remove("fa-eye-slash")
+      con = true
+    }
+
+  }
+</script>
+<!--  Bootstrap 5 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="../../static/js/logni.js">
+  </script>
+
 </html>

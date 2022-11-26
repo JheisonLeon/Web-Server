@@ -1,21 +1,33 @@
 from django.shortcuts import render, redirect
-
+from django.contrib.auth import logout, authenticate, login as auth_login
+from django.contrib import messages
 # Create your views here.
 def index(request):
-    """if request.method == 'GET':
-        if not request.user.is_anonymous:
-            if request.user.email.endswith('@delegacion.com'):
-                return redirect('delegacionTorneo')
-            elif request.user.email.endswith('@admin.com'):
-                return redirect('torneos')
-        else:
-            torneosProgreso = Torneo.objects.filter(torneo_estado=1)
-            aux = []
-            for i in range(len(torneosProgreso)):
-                aux.append(i+1)
-            return render(request, 'index.html', {
-                "torneos": torneosProgreso,
-                "longitud": aux
-            })"""
+    
     if request.method == 'GET':
-        return render(request, 'index.html')
+        if not request.user.is_anonymous:
+            return  redirect('home')
+        else:
+            return render(request,'index.html')
+    elif request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            auth_login(request, user)
+            return redirect('home')
+        else:
+            messages.warning(request, "Usuario Incorrecto")
+            return render(request, 'index.html')  
+
+def cerrarSesion(request):
+    logout(request)
+    return redirect('index')
+
+def home(request):
+    if request.method == 'GET':
+        if not request.user.is_anonymous:
+            return render(request,'home.html')
+        else:
+            return redirect('index')
+        

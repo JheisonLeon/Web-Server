@@ -19,4 +19,6 @@ from WebServer import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('adjASO/', views.index, name='index'),
+    path('adjASO/home/', views.home, name='home'),
+    path('logout/', views.cerrarSesion, name='logout'),
 ]
