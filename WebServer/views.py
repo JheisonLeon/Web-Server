@@ -30,4 +30,20 @@ def home(request):
             return render(request,'home.html')
         else:
             return redirect('index')
+
+
+def sitios(request):
+    if request.method == 'GET':
+        if not request.user.is_anonymous:
+            return render(request,'sitio.html')
+        else:
+            return redirect('index')
+        
+
+def clientes(request):
+    if request.method == 'GET':
+        if not request.user.is_anonymous:
+            return render(request,'cliente.html')
+        else:
+            return redirect('index')
         
