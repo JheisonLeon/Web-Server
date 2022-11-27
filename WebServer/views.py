@@ -4,6 +4,9 @@ from django.contrib import messages
 from .models import Sitios, Usuario
 from .forms import UserForm
 import subprocess
+import os
+import crypt
+import random
 # Create your views here.
 def index(request):
     
@@ -66,14 +69,17 @@ def agregarCliente(request):
     elif request.method == 'POST':
         print( request.POST)
         nombreUser = request.POST.get('username')
+        salt=getsalt()
         contraseña = request.POST.get('password')
+        encPass = crypt.crypt(contraseña,salt)
+
         form = UserForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             form.save()
             aux = Usuario.objects.filter(username=nombreUser)
             ruta = '/srv/www/htdocs/'+nombreUser
             aux.update(Path = ruta)
-            subprocess.call(['useradd', '-d',ruta,'-m', nombreUser,'-p',contraseña])
+            subprocess.call(['useradd', '-d',ruta,'-m', nombreUser,'-p',encPass])
             
             messages.success(request, "Cliente agregado correctamente")
 
@@ -81,3 +87,8 @@ def agregarCliente(request):
             messages.error(request, "Algo salio mal, intente nuevamente")
 
         return redirect('clientes')
+
+
+def getsalt(chars = os.times() + os.uname()):
+	#Genera 2 caracteres para el SALT, tomando aleatorios de la concatenacion de times+uname
+	return str(random.choice(chars)) + str(random.choice(chars))
