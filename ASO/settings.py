@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'WebServer',
         'USER': 'root',
         'PASSWORD': 'adjASO',
-        'HOST':'192.168.0.201',
+        'HOST':'localhost',
         'PORT':'3307'
     }
 }
