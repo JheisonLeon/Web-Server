@@ -66,11 +66,16 @@ def agregarCliente(request):
     elif request.method == 'POST':
         print( request.POST)
         nombreUser = request.POST.get('username')
+        contraseña = request.POST.get('password')
         form = UserForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             form.save()
-            subprocess.call(['useradd', '-d','/home/'+nombreUser,'-m', nombreUser])
-           
+            aux = Usuario.objects.filter(username=nombreUser)
+            ruta = '/srv/www/htdocs/'+nombreUser
+            aux.update(Path = ruta)
+            subprocess.call(['useradd', '-d',ruta,'-m', nombreUser])
+            subprocess.call(['passwd', nombreUser])
+            subprocess.call([contraseña])
             messages.success(request, "Cliente agregado correctamente")
 
         else:
