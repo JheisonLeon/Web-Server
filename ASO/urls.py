@@ -22,5 +22,6 @@ urlpatterns = [
     path('adjASO/home/', views.home, name='home'),
     path('adjASO/sitios/', views.sitios, name='sitios'),
     path('adjASO/clientes/', views.clientes, name='clientes'),
+    path('adjASO/clientes/nuevo', views.agregarCliente, name='agregarCliente'),
     path('logout/', views.cerrarSesion, name='logout'),
 ]

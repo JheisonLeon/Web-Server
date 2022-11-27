@@ -4,8 +4,34 @@
 
 {% block contenido %}
 
-<article class="box" id="Tab2">
-    TAB CLIENTE
-  </article>
-
+<div class="col-12 text-end">
+  <a  href="{%url 'agregarCliente' %}" class="btn btn-success">Nuevo Cliente</a>
+  <br> <br>
+  <div class="table-responsive">
+    <table class="table table-stripped table-bordered">
+      <colgroup>
+        <col width="10%">
+        <col width="30%">
+        <col width="60%">
+    </colgroup>
+      <thead >
+        <tr class="table-dark text-center">
+          <th scope="col">Id</th>
+          <th scope="col">Usuario</th>
+          <th scope="col">Path</th>
+        </tr>
+      </thead>
+      <tbody class="table-primary text-center">
+        {% for i in users %}
+        <tr class="">
+          <td scope="row">{{i.id}}</td>
+          <td>{{i.username}}</td>
+          <td>{{i.Path}}</td>
+        </tr>
+        {% endfor %}  
+      </tbody>
+    </table>
+  </div>
+  
+</div>
 {% endblock %}
