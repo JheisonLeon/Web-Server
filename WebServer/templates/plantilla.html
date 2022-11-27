@@ -87,7 +87,11 @@
     {% if messages %}
       {% for m in messages %}
         <script>
-          Swal.fire('{{m}}', '', 'error');
+          if('{{m}}'=='ERROR'){
+            Swal.fire('Algo salió mal intente nuevamente', '', 'error');
+          }else{
+            Swal.fire('Cliente creado correctamente', '', 'success');
+          }
         </script>
       {% endfor %}
     {% endif %}

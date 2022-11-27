@@ -81,10 +81,10 @@ def agregarCliente(request):
             aux.update(Path = ruta)
             subprocess.call(['useradd', '-d',ruta,'-m', nombreUser,'-p',encPass])
             
-            messages.success(request, "Cliente agregado correctamente")
+            messages.success(request, "CORRECTO")
 
         else:
-            messages.error(request, "Algo salio mal, intente nuevamente")
+            messages.error(request, "ERROR")
 
         return redirect('clientes')
 
