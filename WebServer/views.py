@@ -73,9 +73,8 @@ def agregarCliente(request):
             aux = Usuario.objects.filter(username=nombreUser)
             ruta = '/srv/www/htdocs/'+nombreUser
             aux.update(Path = ruta)
-            subprocess.call(['useradd', '-d',ruta,'-m', nombreUser])
-            subprocess.call(['passwd', nombreUser])
-            subprocess.call([contraseña])
+            subprocess.call(['useradd', '-d',ruta,'-m', nombreUser,'-p',contraseña])
+            
             messages.success(request, "Cliente agregado correctamente")
 
         else:
