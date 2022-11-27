@@ -3,6 +3,7 @@ from django.contrib.auth import logout, authenticate, login as auth_login
 from django.contrib import messages
 from .models import Sitios, Usuario
 from .forms import UserForm
+import subprocess
 # Create your views here.
 def index(request):
     
@@ -64,10 +65,11 @@ def agregarCliente(request):
             return redirect('index')
     elif request.method == 'POST':
         print( request.POST)
-
+        nombreUser = request.POST.get('username')
         form = UserForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             form.save()
+            subprocess.call(['useradd', '-d','/home/'+nombreUser,'-m', nombreUser])
            
             messages.success(request, "Cliente agregado correctamente")
 
