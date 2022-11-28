@@ -101,8 +101,9 @@ def agregarSitio(request):
     elif request.method == 'POST':
         print( request.POST)
         nombreSitio = request.POST.get('dominio')
+        complemento = request.POST.get('subdominio')
         cliente = request.POST.get('cliente')
-        completo = "www."+nombreSitio.lower()+".com"
+        completo = "www."+nombreSitio.lower()+complemento
         aux = Usuario.objects.filter(id = int(cliente))
         aux.update(estado='OCUPADO')
         sit = Sitios(dominio = nombreSitio.lower(), user = aux.first(), completo = completo)
@@ -125,7 +126,7 @@ def agregarSitio(request):
         h.write('\nPAGINA CORRESPONDIENTE A'+aux.first().username)
         h.close()
 
-        subdominio = ".com"
+        subdominio = complemento
         i = open('/etc/named.conf',"a")
         i.write('\nzone "'+nombreSitio.lower()+subdominio+'" in {')
         i.write('\n\tallow-transfer {any;};')

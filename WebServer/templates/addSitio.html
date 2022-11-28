@@ -71,11 +71,25 @@
               <br>
               <div class="position-relative">
                 <label for="nombreEquipo" id="" class="primer" >Nombre del sitio </label>  
-                <input type="text" class="primer form-control"  onchange="validar()" name="dominio"
-                id="nombreSitio" pattern="^(?!\s)[a-zA-Z]{5,50}" placeholder="Ingrese el nombre de su sitio web"  required>
-                <div class="invalid-tooltip">
-                 Sólo caracteres de a-zA-Z
-              </div>
+                <div class="row">
+                  <div class="col-9">
+                    <input type="text" class="primer form-control"  onchange="validar()" name="dominio"
+                    id="nombreSitio" pattern="^(?!\s)[a-zA-Z]{5,50}" placeholder="Ingrese el nombre de su sitio web"  required>
+                    <div class="invalid-tooltip">
+                     Sólo caracteres de a-zA-Z
+                  </div>
+
+                  </div>
+                  <div class="col-3">
+                    <select class="form-select" id="input" name="subdominio" required>
+                      <option selected value="">-</option>
+                      <option value=".com">.com</option>
+                      <option value=".net">.net</option>
+                      <option value=".bo">.bo</option>
+                  </select>
+                  </div>
+                </div>
+                
               </div>
              
               <br>
