@@ -41,9 +41,9 @@ def home(request):
 def sitios(request):
     if request.method == 'GET':
         if not request.user.is_anonymous:
-            users = Usuario.objects.all()
+            sitio = Sitios.objects.all()
             return render(request,'sitio.html',{
-                'users':users,
+                'sitios':sitio,
             })
         else:
             return redirect('index')
@@ -78,7 +78,7 @@ def agregarCliente(request):
             form.save()
             aux = Usuario.objects.filter(username=nombreUser)
             ruta = '/srv/www/htdocs/'+nombreUser
-            aux.update(Path = ruta)
+            aux.update(Path = ruta, estado='LIBRE')
             subprocess.call(['useradd', '-d',ruta,'-m', nombreUser,'-p',encPass])
             
             messages.success(request, "CORRECTO")
@@ -88,6 +88,32 @@ def agregarCliente(request):
 
         return redirect('clientes')
 
+
+def agregarSitio(request):
+    if request.method == 'GET':
+        if not request.user.is_anonymous:
+            usuarios = Usuario.objects.filter(estado='LIBRE')
+            return render(request,'addSitio.html',{
+                'usuarios':usuarios,
+            })
+        else:
+            return redirect('index')
+    elif request.method == 'POST':
+        print( request.POST)
+        nombreSitio = request.POST.get('dominio')
+        cliente = request.POST.get('cliente')
+        completo = "www."+nombreSitio.lower()+".com"
+        aux = Usuario.objects.filter(id = int(cliente))
+        aux.update(estado='OCUPADO')
+        sit = Sitios(dominio = nombreSitio, user = aux.first(), completo = completo)
+        sit.save()
+        #subprocess.call(['useradd', '-d',ruta,'-m', nombreUser,'-p',encPass])
+        f = open('/etc/hosts',"a")
+        f.write('192.168.0.201  '+completo)
+        f.close()
+        messages.success(request, "CORRECTO")
+
+        return redirect('sitios')
 
 def getsalt(chars = os.times() + os.uname()):
 	#Genera 2 caracteres para el SALT, tomando aleatorios de la concatenacion de times+uname

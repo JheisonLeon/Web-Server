@@ -19,8 +19,10 @@ from WebServer import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('adjASO/', views.index, name='index'),
+    path('', views.index, name='index'),
     path('adjASO/home/', views.home, name='home'),
     path('adjASO/sitios/', views.sitios, name='sitios'),
+    path('adjASO/sitios/nuevo', views.agregarSitio, name='agregarSitio'),
     path('adjASO/clientes/', views.clientes, name='clientes'),
     path('adjASO/clientes/nuevo', views.agregarCliente, name='agregarCliente'),
     path('logout/', views.cerrarSesion, name='logout'),

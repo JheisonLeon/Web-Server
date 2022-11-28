@@ -4,8 +4,39 @@
 
 {% block contenido %}
 
-<article class="box" id="Tab3">
-    TAB SITIO
-  </article>
+
+<div class="col-12 text-end">
+  <a  href="{%url 'agregarSitio' %}" class="btn btn-success">Nuevo Sitio</a>
+  <br> <br>
+  <div class="table-responsive">
+    <table class="table table-stripped table-bordered">
+      <colgroup>
+        <col width="10%">
+        <col width="20%">
+        <col width="35%">
+        <col width="35%">
+    </colgroup>
+      <thead >
+        <tr class="table-dark text-center">
+          <th scope="col">Id</th>
+          <th scope="col">Subdominio</th>
+          <th scope="col">URL</th>
+          <th scope="col">Cliente</th>
+        </tr>
+      </thead>
+      <tbody class="table-primary text-center">
+        {% for i in sitios %}
+        <tr class="">
+          <td scope="row">{{i.id}}</td>
+          <td>{{i.dominio}}</td>
+          <td>{{i.completo}}</td>
+          <td>{{i.user.username}}</td>
+        </tr>
+        {% endfor %}  
+      </tbody>
+    </table>
+  </div>
+  
+</div>
 
 {% endblock %}

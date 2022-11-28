@@ -1,0 +1,119 @@
+body {
+    background-image: url('/static/images/fondo2.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.opcion{
+    color: black !important;
+    font-weight: bold !important;
+}
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#botones .btn{
+    padding: 0px !important;
+    width: 120px;
+}
+
+.active{
+    background-color: black;
+    transition: all 1s;
+    margin-top: 10px !important;
+
+}
+
+.active .card{
+    background-color: #7a58bf;
+    color: white !important;
+    
+}
+
+header{
+    position: sticky !important;
+    top:0;
+}
+.navbar-custom {
+    background-color: #2c41625a;
+    
+}
+
+.header-box{
+    padding: 16px 0px 24px !important;
+}
+#enlaces{
+    width: 23px;
+}
+
+.item{
+    padding: 16px;
+}
+.navbar-brand{
+    color: white !important;
+}
+
+#side_nav{
+    position: fixed;
+    top: 58px;
+    left: 0;
+    background: #003975b4;
+    width: 300px;
+    max-width: 300px;
+    height: 100%;
+}
+
+.header-box{
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+
+.list-unstyled{
+    font-size: 20px;
+}
+
+
+.menu-expanded{
+    transition: all 1000ms ease;
+    width: 350px !important;
+}
+
+.menu-collapsed{
+    transition: all 500ms ease;
+    width: 55px !important;
+}
+
+.menu-collapsed .header-box .tabs .item span{
+    display: none;
+}
+
+header, #side_nav{
+    z-index: 50;
+}
+#triggerId{
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+#triggerIdD{
+    background-color:white ;
+    padding: 0px 10px;
+    text-align: right;
+}
+#usuario{
+    font-size: 16px !important;
+    color: #003975 !important;
+}
+
+.container-fluid{
+    margin: 0px 35px 0px 10px !important;
+}
+
+label{
+    font-weight: bolder;
+    color: white !important;
+}
