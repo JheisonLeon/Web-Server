@@ -17,3 +17,17 @@
       })
   })()
   
+
+  function validar(){
+    aux = document.getElementById('username')
+    sitio = aux.value
+    if (sitio.includes(' ')){
+      aux.value = '';
+      Swal.fire('No debe existir espacios en blanco', '', 'error');
+      
+    } if (sitio.includes(',') || sitio.includes('.')){
+      aux.value = '';
+      Swal.fire('No debe existir comas ni puntos', '', 'error');
+      
+    }
+  }
