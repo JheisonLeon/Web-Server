@@ -114,7 +114,7 @@ def agregarSitio(request):
 
         docRoot = "/srv/www/htdocs/"+aux.first().username
         f = open('/etc/apache2/conf.d/vhost.conf',"a")
-        f.write('<virtualHost *:80>')
+        f.write('\n<virtualHost *:80>')
         f.write('\nDocumentRoot "'+docRoot+'"')
         f.write('\nserverName      '+completo)
         f.write('\n</virtualHost>')
