@@ -19,7 +19,7 @@
   
 
   function validar(){
-    aux = document.getElementById('username')
+    aux = document.getElementById('nombreUsuario')
     sitio = aux.value
     if (sitio.includes(' ')){
       aux.value = '';
