@@ -112,11 +112,12 @@ def agregarSitio(request):
         f.write('192.168.0.201   '+completo)
         f.close()
 
+        docRoot = "/srv/www/htdocs/"+aux.first().username
         f = open('/etc/apache2/conf.d/vhost.conf',"a")
         f.write('<virtualHost *:80>')
-        f.write('DocumentRoot "/srv/www/htdocs/"'+aux.first().username)
-        f.write('serverName      '+completo)
-        f.write('</virtualHost>')
+        f.write('\nDocumentRoot "'+docRoot+'"')
+        f.write('\nserverName      '+completo)
+        f.write('\n</virtualHost>')
         f.close()
         messages.success(request, "CORRECTO")
 
