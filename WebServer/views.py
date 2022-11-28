@@ -109,7 +109,7 @@ def agregarSitio(request):
         sit.save()
         #subprocess.call(['useradd', '-d',ruta,'-m', nombreUser,'-p',encPass])
         f = open('/etc/hosts',"a")
-        f.write('192.168.0.201   '+completo)
+        f.write('\n192.168.0.201   '+completo)
         f.close()
 
         docRoot = "/srv/www/htdocs/"+aux.first().username
