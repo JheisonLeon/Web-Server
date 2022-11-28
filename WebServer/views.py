@@ -113,12 +113,19 @@ def agregarSitio(request):
         f.close()
 
         docRoot = "/srv/www/htdocs/"+aux.first().username
-        f = open('/etc/apache2/conf.d/vhost.conf',"a")
-        f.write('\n<virtualHost *:80>')
-        f.write('\nDocumentRoot "'+docRoot+'"')
-        f.write('\nserverName      '+completo)
-        f.write('\n</virtualHost>')
-        f.close()
+        g = open('/etc/apache2/conf.d/vhost.conf',"a")
+        g.write('\n<virtualHost *:80>')
+        g.write('\nDocumentRoot "'+docRoot+'"')
+        g.write('\nserverName      '+completo)
+        g.write('\n</virtualHost>')
+        g.close()
+
+        subprocess.call(['touch', docRoot+'/index.html'])
+        h = open(docRoot+'/index.html',"a")
+        h.write('\nPAGINA CORRESPONDIENTE A'+aux.first().username)
+        h.close()
+
+        subprocess.call(['systemctl', 'restart','apache2'])
         messages.success(request, "CORRECTO")
 
         return redirect('sitios')
