@@ -105,11 +105,18 @@ def agregarSitio(request):
         completo = "www."+nombreSitio.lower()+".com"
         aux = Usuario.objects.filter(id = int(cliente))
         aux.update(estado='OCUPADO')
-        sit = Sitios(dominio = nombreSitio, user = aux.first(), completo = completo)
+        sit = Sitios(dominio = nombreSitio.lower(), user = aux.first(), completo = completo)
         sit.save()
         #subprocess.call(['useradd', '-d',ruta,'-m', nombreUser,'-p',encPass])
         f = open('/etc/hosts',"a")
-        f.write('192.168.0.201  '+completo)
+        f.write('192.168.0.201   '+completo)
+        f.close()
+
+        f = open('/etc/apache2/conf.d/vhost.conf',"a")
+        f.write('<virtualHost *:80>')
+        f.write('DocumentRoot "/srv/www/htdocs/"'+aux.first().username)
+        f.write('serverName      '+completo)
+        f.write('</virtualHost>')
         f.close()
         messages.success(request, "CORRECTO")
 
