@@ -9,6 +9,7 @@ class Usuario(models.Model):
     
 class Sitios(models.Model):
     dominio = models.CharField(max_length=50, null=True)
+    subDominio = models.CharField(max_length=50, null=True)
     completo = models.CharField(max_length=100, null=True)
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     

@@ -106,7 +106,7 @@ def agregarSitio(request):
         completo = "www."+nombreSitio.lower()+complemento
         aux = Usuario.objects.filter(id = int(cliente))
         aux.update(estado='OCUPADO')
-        sit = Sitios(dominio = nombreSitio.lower(), user = aux.first(), completo = completo)
+        sit = Sitios(dominio = nombreSitio.lower(), user = aux.first(), completo = completo, subdominio=complemento)
         sit.save()
         #subprocess.call(['useradd', '-d',ruta,'-m', nombreUser,'-p',encPass])
         f = open('/etc/hosts',"a")

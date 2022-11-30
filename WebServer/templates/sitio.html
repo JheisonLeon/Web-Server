@@ -28,7 +28,7 @@
         {% for i in sitios %}
         <tr class="">
           <td scope="row">{{i.id}}</td>
-          <td>{{i.dominio}}</td>
+          <td>{{i.dominio i.subdominio}}</td>
           <td id="url"> {{i.completo}}</td>
           <td>{{i.user.username}}</td>
         </tr>
